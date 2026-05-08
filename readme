@@ -1,17 +1,179 @@
-# Informational Separability Simulator
-### Visual Evidence Machine for *Error Catastrophe in Evolving Substrates*
+`markdown
 
-This repository transforms the theoretical framework from  
-**“Informational Separability as a Physical Order Parameter in Evolving Substrates”**  
-into a dynamic, visual proof engine.
+Error-Catastrophe Simulator
+
+Visual Evidence Engine for Informational Separability (X)
+
+This repository contains the simulation code, visualizations, and reproducible experiments that accompany the paper:
+
+“Informational Separability as a Physical Order Parameter in Evolving Substrates” — Justin Cammarata (2026)
+
+The goal of this project is to transform the paper’s theoretical framework into dynamic, visual, simulation‑based evidence.  
+This repo is designed to help readers, reviewers, and skeptics see the behavior of:
+
+- Informational Separability \( x(t) \)  
+- Instruction–State Inseparability  
+- Dynamic recoverability  
+- Error‑catastrophe transitions  
+- Behavior across two substrates (Gray–Scott + logistic map)
+
+If the paper is the theory, this repo is the proof machine.
 
 ---
 
-## 🧠 Overview
+📁 Repository Structure
 
-Physical information systems — from reaction‑diffusion substrates to nonlinear maps — encode and process information through their evolving states.  
-This project demonstrates how **Informational Separability (x)** acts as a measurable control parameter governing recoverability and error‑catastrophe transitions.
+`
+error-catastrophe-sim/
+│
+├── README.md
+├── requirements.txt
+│
+├── src/
+│   ├── separability.py
+│   ├── gray_scott.py
+│   ├── logistic_map.py
+│   ├── recoverability.py
+│   ├── visualization.py
+│   └── run_all.py
+│
+├── notebooks/
+│   ├── demograyscott.ipynb
+│   ├── demologisticmap.ipynb
+│   └── demoerrorcatastrophe.ipynb
+│
+├── figures/
+│   ├── gray_scott/
+│   ├── logistic_map/
+│   └── catastrophe/
+│
+└── data/
+    └── raw/
+`
+
+Each directory has a clear purpose:
+
+- src/ — all core simulation + math code  
+- notebooks/ — interactive demos  
+- figures/ — auto‑generated images  
+- data/ — raw or intermediate data  
+- README.md — this file  
 
 ---
 
-## 📂 Repository Structure
+⚙️ Installation
+
+If you want to run the simulations locally:
+
+1. Clone the repository:
+   `bash
+   git clone https://github.com/JayCamm/error-catastrophe-sim.git
+   cd error-catastrophe-sim
+   `
+
+2. Install dependencies:
+   `bash
+   pip install -r requirements.txt
+   `
+
+3. (Optional) Launch Jupyter notebooks:
+   `bash
+   jupyter notebook
+   `
+
+---
+
+🚀 Running the Full Simulation Suite
+
+To generate all figures and run all models:
+
+`bash
+python src/run_all.py
+`
+
+This will:
+
+- Run the Gray–Scott reaction–diffusion model  
+- Compute Informational Separability \( x(t) \)  
+- Compute recoverability  
+- Run the error‑catastrophe propagation model  
+- Save all figures into the figures/ directory  
+
+---
+
+📊 What This Repository Demonstrates
+
+1. Informational Separability \( x(t) \)
+A trajectory‑based, empirical order parameter measuring distinguishability under state‑dependent dispersion.
+
+2. Instruction–State Inseparability
+Noise amplification depends on the state itself — not an external channel.
+
+3. Dynamic Recoverability
+Using the phenomenological functional:
+
+\[
+g(x) = 1 - e^{-x^2/2}
+\]
+
+4. Error‑Catastrophe Transition
+A mean‑field model predicting a critical threshold \( x^* \) where recoverability collapses.
+
+5. Cross‑Substrate Consistency
+Both the Gray–Scott system and the logistic map show the same:
+
+- Stable regime → high separability  
+- Chaotic regime → collapse of \( x \)  
+
+---
+
+🧪 Included Models
+
+Gray–Scott Reaction–Diffusion System
+A classical nonlinear chemical model that produces patterns, waves, and chaotic regimes.
+
+Logistic Map
+A minimal nonlinear system used to demonstrate separability collapse in the chaotic regime.
+
+Error‑Catastrophe Model
+Implements the exponential overlap ansatz:
+
+\[
+\beta(x) = e^{-x/x^*}
+\]
+
+and propagates failure probability over time.
+
+---
+
+📘 For Beginners
+
+If you're new to GitHub or scientific computing:
+
+- Start with the notebooks in /notebooks/  
+- They walk through each concept step‑by‑step  
+- You can run them without understanding the full math  
+- The visuals make the ideas intuitive  
+
+---
+
+🤝 Contributing
+
+Pull requests are welcome.  
+If you want to extend the framework to new substrates (e.g., neural nets, analog circuits, biological systems), feel free to open an issue.
+
+---
+
+📄 License
+
+MIT License — free to use, modify, and distribute.
+
+---
+
+📬 Contact
+
+For questions, collaborations, or research inquiries:  
+Justin_Cammarata@gmail.com
+GitHub: JayCamm
+
+`
