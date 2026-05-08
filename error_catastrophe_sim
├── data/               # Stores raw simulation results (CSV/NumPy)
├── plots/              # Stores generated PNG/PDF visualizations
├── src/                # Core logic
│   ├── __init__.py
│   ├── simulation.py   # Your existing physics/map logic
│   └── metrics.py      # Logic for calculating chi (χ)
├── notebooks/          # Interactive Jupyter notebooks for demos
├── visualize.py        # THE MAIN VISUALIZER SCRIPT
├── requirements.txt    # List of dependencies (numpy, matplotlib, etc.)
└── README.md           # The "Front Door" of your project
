@@ -1,0 +1,11 @@
+error_catastrophe_sim/
+├── data/               # Stores raw simulation results (CSV/NumPy)
+├── plots/              # Stores generated PNG/PDF visualizations
+├── src/                # Core logic
+│   ├── __init__.py
+│   ├── simulation.py   # Your existing physics/map logic
+│   └── metrics.py      # Logic for calculating chi (χ)
+├── notebooks/          # Interactive Jupyter notebooks for demos
+├── visualize.py        # THE MAIN VISUALIZER SCRIPT
+├── requirements.txt    # List of dependencies (numpy, matplotlib, etc.)
+└── README.md           # The "Front Door" of your project
