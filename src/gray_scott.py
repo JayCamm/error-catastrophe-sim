@@ -35,3 +35,18 @@ def run_gray_scott(steps=2000, size=128, params=None):
         trajectory.append((u.copy(), v.copy()))
 
     return trajectory
+
+def run_gray_scott_frames(steps=400, dt=1.0, frame_interval=1):
+    """
+    Runs Gray-Scott and returns a list of frames (u fields).
+    """
+    u, v = initialize_fields()
+    frames = []
+
+    for t in range(steps):
+        u, v = update(u, v, dt)
+
+        if t % frame_interval == 0:
+            frames.append(u.copy())
+
+    return frames
