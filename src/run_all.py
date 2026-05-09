@@ -1,30 +1,63 @@
-# src/run_all.py
+import os
 import numpy as np
-from gray_scott import run_gray_scott
+
 from separability import separability
-from recoverability import recoverability, propagate_failure
-from visualization import plot_separability, plot_gray_scott
+from gray_scott import run_gray_scott
+from logistic_map import run_logistic_map
+from recoverability import failure_propagation
+from visualization import (
+    plot_separability,
+    plot_gray_scott,
+    plot_failure
+)
 
+# ---------------------------------------------------------
+# Helper: ensure directory exists
+# ---------------------------------------------------------
+def ensure_dir(path):
+    directory = os.path.dirname(path)
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory, exist_ok=True)
+
+# ---------------------------------------------------------
+# Main execution
+# ---------------------------------------------------------
 def main():
-    traj = run_gray_scott(steps=500)
-    xs = []
 
-    for t in range(2, len(traj)):
-        u0, v0 = traj[t-2]
-        u1, v1 = traj[t-1]
-        u, v = traj[t]
+    print("Running simulations...")
 
-        S0 = np.stack([u0, v0], axis=-1)
-        S1 = np.stack([u1, v1], axis=-1)
-        S  = np.stack([u,  v ], axis=-1)
+    # -----------------------------------------------------
+    # 1. Logistic map separability demo
+    # -----------------------------------------------------
+    print("Computing separability x(t) for logistic map...")
+    xs = separability()
+    sep_path = "figures/separability.png"
+    ensure_dir(sep_path)
+    plot_separability(xs, savepath=sep_path)
+    print(f"Saved separability figure to {sep_path}")
 
-        xs.append(separability(S0, S1, S))
+    # -----------------------------------------------------
+    # 2. Gray-Scott simulation
+    # -----------------------------------------------------
+    print("Running Gray-Scott model...")
+    u, v = run_gray_scott(steps=200)
+    gs_path = "figures/gray_scott/fields.png"
+    ensure_dir(gs_path)
+    plot_gray_scott(u, v, savepath=gs_path)
+    print(f"Saved Gray-Scott fields to {gs_path}")
 
-    xs = np.array(xs)
-    plot_separability(xs, savepath="../figures/separability.png")
+    # -----------------------------------------------------
+    # 3. Failure propagation (error catastrophe)
+    # -----------------------------------------------------
+    print("Running failure propagation model...")
+    p = failure_propagation()
+    fail_path = "figures/catastrophe/failure.png"
+    ensure_dir(fail_path)
+    plot_failure(p, savepath=fail_path)
+    print(f"Saved failure propagation figure to {fail_path}")
 
-    # Example catastrophe simulation
-    p = propagate_failure(0.01, xs, x_star=0.5)
+    print("All simulations complete.")
+
 
 if __name__ == "__main__":
     main()
